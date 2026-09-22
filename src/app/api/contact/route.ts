@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { contactEmail } from "./email";
+import { siteUrl } from "@/lib";
 
 /**
  * Recibe el formulario de contacto y lo envía por correo con Resend
@@ -66,7 +67,7 @@ export async function POST(req: Request) {
     name,
     email,
     message,
-    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    siteUrl: siteUrl(),
   });
 
   if (!apiKey || !to) {

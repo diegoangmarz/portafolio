@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { siteUrl } from "@/lib";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { themeScript } from "@/components/theme-script";
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   return {
     title: { default: t("title"), template: "%s · Diego Angulo" },
     description: t("description"),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    metadataBase: new URL(siteUrl()),
   };
 }
 
