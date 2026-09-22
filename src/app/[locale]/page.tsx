@@ -24,15 +24,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <section className="hero-glow relative overflow-hidden">
         <Container className="flex min-h-[calc(100svh-4rem)] flex-col justify-center py-20 sm:py-28">
           <FadeIn>
-            <Badge tone="accent" className="mb-6 gap-1.5 py-1">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-accent" />
-              </span>
-              {t("available")}
-            </Badge>
-          </FadeIn>
-          <FadeIn delay={0.05}>
             <p className="font-mono text-sm text-fg-muted sm:text-base">{t("greeting")}</p>
             <h1 className="mt-2 text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
               {profile.shortName}

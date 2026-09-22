@@ -11,8 +11,7 @@ simulado). `npm run lint` y `npm run build` limpios. **Falta**: revisar en ancho
 el repo en GitHub, desplegar en Vercel y conectar Resend.
 **Siguiente tarea al retomar:**
 1. Revisar en móvil (≤400 px): hero, tarjetas, menú hamburguesa, formulario. Ajustar lo que se rompa.
-2. Diego: decidir si "Disponible para nuevas oportunidades" (`Home.available`) se muestra.
-   Rotar la API key de Resend (la primera pasó por el chat): borrarla en Resend, crear otra y
+2. Diego: rotar la API key de Resend (la primera pasó por el chat): borrarla en Resend, crear otra y
    pegarla en `.env` (Diego, sin mandarla). Nota: sin dominio verificado, Resend solo entrega al
    correo de la propia cuenta y desde `onboarding@resend.dev`; para este uso basta.
 3. Cuando Diego diga: `/promover-prod`, importar en Vercel con rama de producción `prod` y
@@ -50,12 +49,27 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 - [x] Páginas con contenido real desde `src/data/`.
 - [x] Revisión visual en escritorio (claro + oscuro, es/en) y ajustes de Diego (2026-09-21).
 - [x] Formulario de contacto real (`/api/contact` + Resend, honeypot, rate limit básico).
-- [ ] Revisión en móvil.
-- [ ] Datos que faltan: LinkedIn, texto de disponibilidad.
-- [ ] Repo en GitHub (`dev`/`prod`) + Vercel con rama `prod` + variables + `INFRA.md`.
-- [ ] SEO básico: `sitemap.ts`, `robots.ts`, `alternates.languages` (hreflang) en metadata, OG image.
-- [ ] Capturas reales de TriviaSpin y El Alce Manda (móvil) en `public/projects/` y campo `image` en `Project`.
-- [ ] CV en PDF en `public/` y activar el botón.
+- [x] LinkedIn añadido; etiqueta «Disponible para nuevas oportunidades» eliminada (Diego trabaja,
+      no busca; 2026-09-21). Si algún día la quiere, era un `Badge` con punto animado en el hero.
+- [x] Repo público en GitHub (`dev`/`prod`).
+- [ ] Vercel con rama `prod` + variables + `INFRA.md`.  ← EN CURSO
+- [ ] Revisión en móvil (S24+) sobre la URL de Vercel.
+
+### Fase 1.5 — Pulido para reclutadores (backlog documentado, hacer después del deploy)
+Decisión de Diego (2026-09-21): esto queda registrado aquí, no se hace todavía.
+- [ ] **Capturas reales** de TriviaSpin y El Alce Manda desde el móvil (PNG, ~1080×2340, 2–3 por
+      juego) en `public/projects/<slug>/`; campo `images: string[]` en `Project`; en la tarjeta
+      la primera captura sustituye la franja de color, en el detalle una galería horizontal con
+      `next/image`. Diego pasa las capturas (o se sacan con Chrome DevTools en modo móvil).
+- [ ] **CV en PDF** descargable: `public/cv-diego-angulo-es.pdf` (+ `-en.pdf` si quiere) y activar el
+      botón de Sobre mí. Opción B: generar el PDF desde `profile.ts` con `@react-pdf/renderer` para
+      que nunca se desactualice.
+- [ ] **SEO básico**: `app/sitemap.ts` y `app/robots.ts` (Next los genera), `alternates.languages`
+      (hreflang es/en) y `canonical` en `generateMetadata` del layout, `opengraph-image.tsx` con
+      nombre + título en verde para que LinkedIn/WhatsApp muestren tarjeta al compartir.
+- [ ] **Anti-abuso fuerte del formulario**: ver §3 Alta (Upstash + Turnstile).
+- [ ] **Contraste del verde** en modo claro con una herramienta de accesibilidad (≥ 4.5:1 en texto).
+- [ ] **Analytics gratis** (Vercel Web Analytics en Hobby o Umami): decidir y activar.
 
 ### Fase 2 — IA y GitHub
 - [ ] **Chat «Pregúntale a mi portafolio»**: API route `app/api/chat/route.ts` con streaming, system
@@ -84,10 +98,7 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
       por instancia, no compartido). Plan: `@upstash/ratelimit` con Upstash Redis (free) para un
       límite global por IP y por día, y Cloudflare Turnstile (free, invisible) verificado en la API
       route. Ambos necesitan cuenta de Diego. El tope de Resend (100/día) acota el peor caso.
-- [ ] Revisar contraste del verde en modo claro (`--accent-strong` sobre `--bg`) con una herramienta
-      de accesibilidad; ajustar si baja de 4.5:1 en texto.
 - [ ] `loading.tsx` / skeletons cuando haya datos remotos (Fase 2+).
-- [ ] Analytics gratis (Vercel Analytics Hobby o Umami) — decidir.
 
 ### Media
 - [ ] Página `/uses` o sección "Herramientas" (opcional).
