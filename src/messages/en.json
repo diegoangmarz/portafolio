@@ -1,0 +1,99 @@
+{
+  "Meta": {
+    "title": "Diego Angulo · Full-stack & AI developer",
+    "description": "Portfolio of Diego Angulo Marzuca, software engineer based in Mérida, Mexico. Full-stack projects with React, Nest.js, Next.js and AI integration."
+  },
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLocale": "Cambiar a español",
+    "toggleTheme": "Toggle theme"
+  },
+  "Home": {
+    "greeting": "Hi, I'm",
+    "cta": "See projects",
+    "ctaSecondary": "Let's talk",
+    "available": "Open to new opportunities",
+    "featuredTitle": "Featured projects",
+    "featuredSubtitle": "The best picture of how I work: complete products, deployed and tested with real users.",
+    "allProjects": "See all projects",
+    "stackTitle": "What I build with",
+    "stackSubtitle": "Tools I use every day, plus others I'm comfortable with.",
+    "aiTitle": "Applied AI, not decoration",
+    "aiBody": "I like using language models to solve concrete problems: generating validated content, automating repetitive work and building assistants that answer from real data. Soon you'll be able to ask this portfolio directly."
+  },
+  "About": {
+    "title": "About me",
+    "intro": "I'm a software engineer, graduate of Universidad Modelo (Mérida, Mexico). I enjoy building complete products —from the database schema to the last animation— and lately I focus on integrating artificial intelligence into real applications.",
+    "now": "Currently",
+    "nowBody": "I work as a web development intern in the innovation department at {company}, and in parallel I'm taking a Data Science & Data Analytics program at Desafío Latam.",
+    "education": "Education",
+    "certifications": "Certifications",
+    "skillsStrong": "Core stack",
+    "skillsFamiliar": "Also comfortable with",
+    "skillsAi": "AI & data",
+    "cvCta": "Download CV",
+    "cvSoon": "PDF CV coming soon"
+  },
+  "Projects": {
+    "title": "Projects",
+    "subtitle": "Games, full-stack systems and utilities. The featured ones are deployed and you can try them.",
+    "filterAll": "All",
+    "kind": {
+      "web": "Web",
+      "game": "Game",
+      "backend": "Backend",
+      "tool": "Tool"
+    },
+    "live": "Live demo",
+    "repo": "Source",
+    "repoPrivate": "Private repo",
+    "featured": "Featured",
+    "back": "All projects",
+    "highlights": "Highlights",
+    "stack": "Tech stack",
+    "aiNote": "How it uses AI",
+    "notFound": "Project not found",
+    "moreProjects": "More projects"
+  },
+  "Blog": {
+    "title": "Blog",
+    "subtitle": "Notes on what I'm learning: applied AI, architecture and things that broke in production.",
+    "empty": "No posts yet. The first one will be about generating a trivia question bank with the Claude API.",
+    "soon": "Coming soon"
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "Have a project, a role, or just want to talk about AI? Drop me a line.",
+    "emailLabel": "Email",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn",
+    "locationLabel": "Location",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message",
+      "sending": "Sending…",
+      "success": "Thanks! I'll get back to you soon.",
+      "error": "Couldn't send. Email me directly instead.",
+      "soon": "The form goes live soon; in the meantime, email works great."
+    }
+  },
+  "Footer": {
+    "rights": "Built with Next.js, Tailwind and coffee in Mérida.",
+    "source": "Source of this site"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "The route you're looking for doesn't exist or has moved.",
+    "home": "Back home"
+  }
+}

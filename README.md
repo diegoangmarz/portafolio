@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio — Diego Angulo
 
-## Getting Started
+Sitio personal full-stack + IA: proyectos, sobre mí, blog y contacto, en español e inglés.
+Más adelante: chat «Pregúntale a mi portafolio» con la API de Claude, widget de GitHub y panel
+admin con Prisma + NextAuth.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Next.js 16 (App Router, Turbopack) + React 19 + TypeScript
+Tailwind CSS v4 + Framer Motion + lucide-react
+next-intl (rutas /es y /en con slugs localizados) + next-themes (claro/oscuro)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Correr en local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Requisitos: Node 22+, npm 11+.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev          # → http://localhost:3000  (redirige a /es)
+npm run lint         # eslint
+npm run build        # build de producción (incluye type-check)
+npm start            # sirve el build
+```
 
-## Learn More
+`/` redirige al idioma por defecto (`es`). Rutas: `/es`, `/es/sobre-mi`, `/es/proyectos`,
+`/es/proyectos/[slug]`, `/es/blog`, `/es/contacto` y sus equivalentes `/en/about`,
+`/en/projects`, `/en/contact`.
 
-To learn more about Next.js, take a look at the following resources:
+## Dónde está cada cosa
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/data/profile.ts` — datos del CV (nombre, título, experiencia, skills). Campos bilingües `{ es, en }`.
+- `src/data/projects.ts` — proyectos (slug, resumen, descripción, stack, enlaces). Fase 3: migra a Prisma.
+- `src/messages/{es,en}.json` — textos de interfaz.
+- `src/i18n/routing.ts` — idiomas y slugs localizados; `src/proxy.ts` — middleware de next-intl.
+- `src/app/[locale]/…` — páginas; `src/components/` — UI.
+- `src/app/globals.css` — tokens de color (acento ámbar) para claro/oscuro.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ver `CONTEXT.md` (cómo está hecho) y `ROADMAP.md` (qué sigue).
