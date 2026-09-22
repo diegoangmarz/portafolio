@@ -78,6 +78,8 @@ portafolio/
     app/[locale]/not-found.tsx
     app/api/contact/route.ts   valida, honeypot, rate limit en memoria (5/IP/10 min) y envía con Resend;
                                sin RESEND_API_KEY imprime el mensaje en la terminal y responde ok (simulado)
+    app/api/contact/email.ts   plantilla del correo (text + html con tablas/estilos inline, acento verde,
+                               botón "Responder"); todo lo del visitante pasa por escapeHtml
     components/                site-header (nav + menú móvil), site-footer, theme (useTheme + ThemeToggle),
                                theme-script (inline en <head>), locale-switcher (<a> con navegación completa),
                                project-card, projects-grid, contact-form, motion (FadeIn/Stagger/FadeInItem),
@@ -102,7 +104,10 @@ portafolio/
   (p. ej. capturas desde la extensión) `whileInView` tarda en disparar: esperar 2 s antes de capturar.
 - **Páginas estáticas** (SSG) + una API route dinámica (`/api/contact`).
 - **Formulario de contacto**: `ContactForm` hace `fetch('/api/contact')`; éxito → mensaje con check.
-  Producción necesita `RESEND_API_KEY` + `CONTACT_TO_EMAIL` en Vercel (Resend free: 100/día).
+  Producción necesita `RESEND_API_KEY` + `CONTACT_TO_EMAIL` en Vercel (Resend free: 100/día,
+  3 000/mes). En local Diego las tiene en `.env` (ignorado). Probado el 2026-09-21: llega a Gmail
+  con la plantilla HTML. Ojo: `curl` desde la terminal de Windows manda el JSON sin UTF-8 y la
+  `ñ` llega como `?`; para probar acentos usar el formulario o `python -c` con `urllib`.
 
 ## Gotchas
 
@@ -131,5 +136,6 @@ portafolio/
   Diego: acento **verde** (era ámbar), fuera `next-themes` (aviso de React), fuera Blog, fuera los
   proyectos sin demo pública (quedan TriviaSpin y El Alce Manda), fuera correo/ubicación/Desafío
   Latam, puesto actual = full-stack tiempo completo en SimDataGroup. Formulario de contacto real
-  vía `/api/contact` (Resend; simulado sin clave), probado en local. `lint` y `build` limpios.
-  Sin remoto ni deploy todavía.
+  vía `/api/contact` (Resend; simulado sin clave) con plantilla HTML, probado con envío real a
+  Gmail. Repo público `diegoangmarz/portafolio` creado desde Edge (sin `gh`), `dev` y `prod`
+  subidos. `lint` y `build` limpios. Vercel todavía no (Diego avisa).

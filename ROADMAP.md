@@ -12,14 +12,12 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 **Siguiente tarea al retomar:**
 1. Revisar en móvil (≤400 px): hero, tarjetas, menú hamburguesa, formulario. Ajustar lo que se rompa.
 2. Diego: decidir si "Disponible para nuevas oportunidades" (`Home.available`) se muestra.
-   LinkedIn ya está (2026-09-21). Resend: Diego creó la cuenta el 2026-09-21 → poner
-   `RESEND_API_KEY` y `CONTACT_TO_EMAIL` en `.env.local` (lo pega él; nunca se commitea) y
-   probar el envío real en local. Nota: sin dominio verificado, Resend solo entrega al correo
-   de la propia cuenta y desde `onboarding@resend.dev`; para este uso basta.
-3. Crear repo **público** `diegoangmarz/portafolio` (decisión de Diego, 2026-09-21), push de `dev`
-   y `prod`. **Vercel todavía no** (Diego avisa cuándo); cuando toque: importar con rama de
-   producción `prod` y variables `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`.
-   Crear `INFRA.md`. Probar el formulario en producción.
+   Rotar la API key de Resend (la primera pasó por el chat): borrarla en Resend, crear otra y
+   pegarla en `.env` (Diego, sin mandarla). Nota: sin dominio verificado, Resend solo entrega al
+   correo de la propia cuenta y desde `onboarding@resend.dev`; para este uso basta.
+3. Cuando Diego diga: `/promover-prod`, importar en Vercel con rama de producción `prod` y
+   variables `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`. Crear `INFRA.md`.
+   Probar el formulario en producción y el sitio en el S24+.
 4. Endurecer el formulario (pedido por Diego): rate limit compartido con **Upstash Redis** (free)
    y **Cloudflare Turnstile** (free) — ver §3 Alta.
 
@@ -34,8 +32,9 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 | Tema claro/oscuro + tokens de acento | Hecho (2026-09-21) |
 | Home / Sobre mí / Proyectos / Detalle / Contacto / 404 | Hecho (2026-09-21) — revisado en escritorio; falta móvil |
 | Datos de perfil y proyectos en código | Hecho (2026-09-21) — falta LinkedIn |
-| Formulario de contacto con backend (`/api/contact` + Resend) | Hecho (2026-09-21) — falta `RESEND_API_KEY` |
-| Repo GitHub + deploy Vercel | Pendiente |
+| Formulario de contacto con backend (`/api/contact` + Resend, plantilla HTML) | Hecho (2026-09-21) — probado con envío real |
+| Repo GitHub (`diegoangmarz/portafolio`, público) | Hecho (2026-09-21) |
+| Deploy Vercel | Pendiente — Diego avisa cuándo |
 | Anti-abuso robusto del formulario (Upstash + Turnstile) | Pendiente (hoy: honeypot + límite en memoria) |
 | Capturas/imágenes de proyectos | Pendiente (hoy: franja de color por proyecto) |
 | CV en PDF descargable | Pendiente (botón deshabilitado en Sobre mí) |

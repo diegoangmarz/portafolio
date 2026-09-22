@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { contactEmail } from "./email";
 
 /**
  * Recibe el formulario de contacto y lo envía por correo con Resend
@@ -61,7 +62,12 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
-  const text = `${message}\n\n— ${name} <${email}>`;
+  const { subject, text, html } = contactEmail({
+    name,
+    email,
+    message,
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  });
 
   if (!apiKey || !to) {
     console.log(`[contact] (simulado, sin RESEND_API_KEY) de ${name} <${email}>:\n${message}\n`);
@@ -75,8 +81,9 @@ export async function POST(req: Request) {
       from: process.env.CONTACT_FROM_EMAIL ?? "Portafolio <onboarding@resend.dev>",
       to: [to],
       reply_to: email,
-      subject: `Portafolio · mensaje de ${name}`,
+      subject,
       text,
+      html,
     }),
   });
 
