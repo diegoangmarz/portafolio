@@ -137,7 +137,7 @@ export default async function ProjectPage({ params }: Props) {
       {others.length > 0 && (
         <section className="mt-24 border-t border-border pt-12">
           <h2 className="mb-6 text-2xl font-semibold tracking-tight">{t("moreProjects")}</h2>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2">
             {others.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}

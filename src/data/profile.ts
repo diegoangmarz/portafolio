@@ -2,14 +2,14 @@ import type { Locale } from "@/i18n/routing";
 
 export type Localized = Record<Locale, string>;
 
+// Sin correo ni ubicación a propósito: Diego no quiere mostrarlos (2026-09-21).
+// El destino del formulario de contacto va en la variable de entorno CONTACT_TO_EMAIL.
 export const profile = {
   name: "Diego Angulo Marzuca",
   shortName: "Diego Angulo",
-  email: "diegoangmarz@gmail.com",
-  location: { es: "Mérida, Yucatán, México", en: "Mérida, Yucatán, Mexico" } satisfies Localized,
   github: "https://github.com/diegoangmarz",
   githubUser: "diegoangmarz",
-  linkedin: "", // TODO: Diego, pega aquí la URL de tu perfil de LinkedIn
+  linkedin: "https://www.linkedin.com/in/diegoangmarz/",
   title: {
     es: "Ingeniero en Desarrollo de Tecnología y Software",
     en: "Software & Technology Development Engineer",
@@ -20,11 +20,13 @@ export const profile = {
   } satisfies Localized,
   currentRole: {
     company: "SimDataGroup",
+    // Empezó como pasante (feb 2025) y hoy es empleado de tiempo completo. Solo puesto y tipo
+    // de trabajo, sin detalles del producto (confidencial; no se menciona en el sitio).
     role: {
-      es: "Pasante Web Developer · Innovation Dept",
-      en: "Web Developer Intern · Innovation Dept",
+      es: "Desarrollador Full-stack",
+      en: "Full-stack Developer",
     } satisfies Localized,
-    period: { es: "feb 2025 – presente", en: "Feb 2025 – present" } satisfies Localized,
+    period: { es: "2025 – presente", en: "2025 – present" } satisfies Localized,
   },
   education: [
     {
@@ -35,12 +37,6 @@ export const profile = {
         en: "B.Eng. in Software & Technology Development",
       },
       period: { es: "ago 2021 – jun 2025", en: "Aug 2021 – Jun 2025" },
-    },
-    {
-      school: "Desafío Latam",
-      place: { es: "En línea", en: "Online" },
-      degree: { es: "Data Science / Data Analytics", en: "Data Science / Data Analytics" },
-      period: { es: "2025 – nov 2025", en: "2025 – Nov 2025" },
     },
   ],
   certifications: [

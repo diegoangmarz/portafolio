@@ -4,17 +4,24 @@
 > Actualizar al cerrar cada sesión (`/actualizar-contexto`).
 
 **Última sesión:** 2026-09-21 (sesión 1)
-**Punto exacto donde quedamos:** Fase 1 casi completa en local: sitio público bilingüe con todas
-las páginas, tema claro/oscuro, datos del CV y 6 proyectos en código. `npm run lint` y
-`npm run build` limpios; rutas localizadas verificadas con curl. **Falta**: revisar el diseño en el
-navegador (todavía no se ha visto renderizado), crear el repo en GitHub y desplegar en Vercel.
+**Punto exacto donde quedamos:** Fase 1 revisada con Diego en Edge (escritorio, claro y oscuro,
+es/en): sitio público bilingüe con Home / Sobre mí / Proyectos (TriviaSpin y El Alce Manda) /
+Contacto, acento verde, formulario de contacto real vía `/api/contact` (probado en local en modo
+simulado). `npm run lint` y `npm run build` limpios. **Falta**: revisar en ancho de móvil, crear
+el repo en GitHub, desplegar en Vercel y conectar Resend.
 **Siguiente tarea al retomar:**
-1. Abrir `npm run dev` en el navegador y revisar Home/Sobre mí/Proyectos/Contacto en móvil y
-   escritorio, claro y oscuro. Ajustar lo que se vea mal (tipografía, espaciados, colores).
-2. Diego: rellenar `profile.linkedin`, decidir el `repoUrl` de "Full Stack System" y si "Disponible
-   para nuevas oportunidades" se muestra o no (`Home.available`).
-3. Crear repo `diegoangmarz/portafolio` (privado o público, decidir), push de `dev` y `prod`,
-   importar en Vercel (rama de producción `prod`), `NEXT_PUBLIC_SITE_URL`. Crear `INFRA.md`.
+1. Revisar en móvil (≤400 px): hero, tarjetas, menú hamburguesa, formulario. Ajustar lo que se rompa.
+2. Diego: decidir si "Disponible para nuevas oportunidades" (`Home.available`) se muestra.
+   LinkedIn ya está (2026-09-21). Resend: Diego creó la cuenta el 2026-09-21 → poner
+   `RESEND_API_KEY` y `CONTACT_TO_EMAIL` en `.env.local` (lo pega él; nunca se commitea) y
+   probar el envío real en local. Nota: sin dominio verificado, Resend solo entrega al correo
+   de la propia cuenta y desde `onboarding@resend.dev`; para este uso basta.
+3. Crear repo **público** `diegoangmarz/portafolio` (decisión de Diego, 2026-09-21), push de `dev`
+   y `prod`. **Vercel todavía no** (Diego avisa cuándo); cuando toque: importar con rama de
+   producción `prod` y variables `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`.
+   Crear `INFRA.md`. Probar el formulario en producción.
+4. Endurecer el formulario (pedido por Diego): rate limit compartido con **Upstash Redis** (free)
+   y **Cloudflare Turnstile** (free) — ver §3 Alta.
 
 ---
 
@@ -25,25 +32,28 @@ navegador (todavía no se ha visto renderizado), crear el repo en GitHub y despl
 | Scaffold Next 16 + Tailwind 4 + TS | Hecho (2026-09-21) |
 | i18n es/en con slugs localizados | Hecho (2026-09-21) |
 | Tema claro/oscuro + tokens de acento | Hecho (2026-09-21) |
-| Home / Sobre mí / Proyectos / Detalle / Blog / Contacto / 404 | Hecho (2026-09-21) — sin revisar en navegador |
-| Datos de perfil y proyectos en código | Hecho (2026-09-21) — faltan LinkedIn y repo de Full Stack System |
+| Home / Sobre mí / Proyectos / Detalle / Contacto / 404 | Hecho (2026-09-21) — revisado en escritorio; falta móvil |
+| Datos de perfil y proyectos en código | Hecho (2026-09-21) — falta LinkedIn |
+| Formulario de contacto con backend (`/api/contact` + Resend) | Hecho (2026-09-21) — falta `RESEND_API_KEY` |
 | Repo GitHub + deploy Vercel | Pendiente |
+| Anti-abuso robusto del formulario (Upstash + Turnstile) | Pendiente (hoy: honeypot + límite en memoria) |
 | Capturas/imágenes de proyectos | Pendiente (hoy: franja de color por proyecto) |
 | CV en PDF descargable | Pendiente (botón deshabilitado en Sobre mí) |
 | Chat «Pregúntale a mi portafolio» (Claude) | Pendiente — Fase 2 (sin API key todavía) |
 | Widget de stats de GitHub | Pendiente — Fase 2 |
 | Prisma + Neon + panel admin + NextAuth | Pendiente — Fase 3 |
-| Blog con posts reales | Pendiente — Fase 3 (hoy «Próximamente») |
-| Formulario de contacto con backend | Pendiente — Fase 3 (hoy abre `mailto:`) |
+| Blog | **Descartado** por Diego (2026-09-21); si vuelve, va en Fase 3 con la DB |
 
 ## 2. Plan principal
 
 ### Fase 1 — Sitio público desplegado  ← SIGUIENTE (cerrar esta fase)
 - [x] Scaffold, i18n, tema, componentes base.
 - [x] Páginas con contenido real desde `src/data/`.
-- [ ] Revisión visual en navegador (móvil + escritorio, claro + oscuro) y ajustes.
-- [ ] Datos que faltan: LinkedIn, repo de Full Stack System, texto de disponibilidad.
-- [ ] Repo en GitHub (`dev`/`prod`) + Vercel con rama `prod` + `INFRA.md`.
+- [x] Revisión visual en escritorio (claro + oscuro, es/en) y ajustes de Diego (2026-09-21).
+- [x] Formulario de contacto real (`/api/contact` + Resend, honeypot, rate limit básico).
+- [ ] Revisión en móvil.
+- [ ] Datos que faltan: LinkedIn, texto de disponibilidad.
+- [ ] Repo en GitHub (`dev`/`prod`) + Vercel con rama `prod` + variables + `INFRA.md`.
 - [ ] SEO básico: `sitemap.ts`, `robots.ts`, `alternates.languages` (hreflang) en metadata, OG image.
 - [ ] Capturas reales de TriviaSpin y El Alce Manda (móvil) en `public/projects/` y campo `image` en `Project`.
 - [ ] CV en PDF en `public/` y activar el botón.
@@ -70,7 +80,12 @@ navegador (todavía no se ha visto renderizado), crear el repo en GitHub y despl
 ## 3. Backlog
 
 ### Alta
-- [ ] Revisar contraste del ámbar en modo claro (`--accent-strong` sobre `--bg`) con una herramienta
+- [ ] **Anti-abuso del formulario** (Diego, 2026-09-21: "limitar los envíos por si intentan atacar la
+      página"). Hoy: validación + honeypot + 5 envíos/IP/10 min en memoria (en Vercel el contador es
+      por instancia, no compartido). Plan: `@upstash/ratelimit` con Upstash Redis (free) para un
+      límite global por IP y por día, y Cloudflare Turnstile (free, invisible) verificado en la API
+      route. Ambos necesitan cuenta de Diego. El tope de Resend (100/día) acota el peor caso.
+- [ ] Revisar contraste del verde en modo claro (`--accent-strong` sobre `--bg`) con una herramienta
       de accesibilidad; ajustar si baja de 4.5:1 en texto.
 - [ ] `loading.tsx` / skeletons cuando haya datos remotos (Fase 2+).
 - [ ] Analytics gratis (Vercel Analytics Hobby o Umami) — decidir.
@@ -90,8 +105,15 @@ navegador (todavía no se ha visto renderizado), crear el repo en GitHub y despl
   (`/es/sobre-mi`, `/en/about`).
 - **2026-09-21** — Orden: público → IA → DB/admin. Datos en código hasta la Fase 3.
 - **2026-09-21** — Neon como PostgreSQL (misma cuenta que TriviaSpin, proyecto aparte).
-- **2026-09-21** — Acento ámbar (`oklch(0.72 0.17 60)`) sobre fondo neutro; estilo "moderno con
-  acento", no minimalista tipo terminal. Fuente Geist (viene con create-next-app).
+- **2026-09-21** — Acento **verde** (`oklch(0.72 0.19 150)`; el favorito de Diego, reemplazó al
+  ámbar inicial) sobre fondo neutro; estilo "moderno con acento", no minimalista tipo terminal.
+  Fuente Geist (viene con create-next-app).
+- **2026-09-21** — Solo se muestran proyectos con demo pública accesible (TriviaSpin, El Alce
+  Manda). Sin Blog. Sin correo ni ubicación en el sitio; el contacto es solo por formulario
+  (+ GitHub/LinkedIn). Puesto actual: desarrollador full-stack de tiempo completo en SimDataGroup,
+  sin detalles del producto ni mención de confidencialidad; sin Desafío Latam.
+- **2026-09-21** — Tema propio en vez de `next-themes` y cambio de idioma con navegación completa
+  (motivo: aviso de React 19 por `<script>` en el árbol; ver `CONTEXT.md` → Gotchas).
 - **2026-09-21** — Iconos de marca (GitHub/LinkedIn) inline en `components/icons.tsx`; lucide 1.x ya
   no los incluye.
 - **2026-09-21** — No fusionar los juegos en una app para "hacer sitio": Vercel admite muchos

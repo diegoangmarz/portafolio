@@ -1,32 +1,32 @@
 @import "tailwindcss";
 
-/* Tema por clase (next-themes pone .dark en <html>) */
+/* Tema por clase: theme-script.ts pone .dark en <html> antes de pintar */
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg: oklch(0.985 0.004 80);
+  --bg: oklch(0.985 0.004 150);
   --bg-elevated: oklch(1 0 0);
   --fg: oklch(0.2 0.02 260);
   --fg-muted: oklch(0.48 0.02 260);
   --border: oklch(0.9 0.01 260);
-  --accent: oklch(0.72 0.17 60);
-  --accent-strong: oklch(0.62 0.18 55);
-  --accent-fg: oklch(0.18 0.03 60);
-  --accent-soft: oklch(0.95 0.05 70);
-  --ring: oklch(0.72 0.17 60 / 0.5);
+  --accent: oklch(0.72 0.19 150);
+  --accent-strong: oklch(0.5 0.15 150);
+  --accent-fg: oklch(0.2 0.05 150);
+  --accent-soft: oklch(0.95 0.06 150);
+  --ring: oklch(0.72 0.19 150 / 0.5);
 }
 
 .dark {
   --bg: oklch(0.17 0.015 260);
   --bg-elevated: oklch(0.22 0.015 260);
-  --fg: oklch(0.95 0.005 80);
+  --fg: oklch(0.95 0.005 150);
   --fg-muted: oklch(0.7 0.015 260);
   --border: oklch(0.3 0.015 260);
-  --accent: oklch(0.8 0.16 70);
-  --accent-strong: oklch(0.86 0.15 75);
-  --accent-fg: oklch(0.18 0.03 60);
-  --accent-soft: oklch(0.8 0.16 70 / 0.12);
-  --ring: oklch(0.8 0.16 70 / 0.5);
+  --accent: oklch(0.8 0.19 150);
+  --accent-strong: oklch(0.86 0.17 152);
+  --accent-fg: oklch(0.2 0.05 150);
+  --accent-soft: oklch(0.8 0.19 150 / 0.12);
+  --ring: oklch(0.8 0.19 150 / 0.5);
 }
 
 @theme inline {
@@ -68,7 +68,7 @@ body {
 .hero-glow {
   background:
     radial-gradient(60% 50% at 70% 20%, var(--accent-soft) 0%, transparent 70%),
-    radial-gradient(40% 40% at 20% 80%, oklch(0.7 0.12 250 / 0.12) 0%, transparent 70%);
+    radial-gradient(40% 40% at 20% 80%, oklch(0.75 0.12 200 / 0.14) 0%, transparent 70%);
 }
 
 /* Foco accesible unificado */

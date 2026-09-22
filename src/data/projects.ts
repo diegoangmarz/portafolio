@@ -28,7 +28,7 @@ export const projects: Project[] = [
     featured: true,
     kind: "game",
     year: 2025,
-    accent: "oklch(0.72 0.19 45)",
+    accent: "oklch(0.65 0.2 290)",
     summary: {
       es: "Trivia para fiestas en un solo teléfono: ruleta de categorías, comodines, Modo Sala multi-dispositivo y preguntas generadas con IA.",
       en: "Party trivia on a single phone: category wheel, power-ups, multi-device Room Mode and AI-generated questions.",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     featured: true,
     kind: "game",
     year: 2025,
-    accent: "oklch(0.7 0.17 150)",
+    accent: "oklch(0.72 0.17 55)",
     summary: {
       es: "Juego de cartas para fiestas inspirado en Moose Master, con contenido original en español y Modo Sala con relé en tiempo real.",
       en: "Party card game inspired by Moose Master, with original Spanish content and a real-time Room Mode relay.",
@@ -88,83 +88,6 @@ export const projects: Project[] = [
     liveUrl: "https://el-alce-manda.vercel.app",
     repoUrl: "https://github.com/diegoangmarz/ElAlceManda",
     repoPrivate: true,
-  },
-  {
-    slug: "fullstack-nest-system",
-    name: "Full Stack System",
-    featured: true,
-    kind: "web",
-    year: 2024,
-    accent: "oklch(0.65 0.2 290)",
-    summary: {
-      es: "Sistema full-stack con Nest.js + Prisma + MySQL y un cliente React/TypeScript con shadcn/ui.",
-      en: "Full-stack system with Nest.js + Prisma + MySQL and a React/TypeScript client using shadcn/ui.",
-    },
-    description: {
-      es: "Aplicación completa con API REST en Nest.js, modelado de datos con Prisma sobre MySQL y un frontend en React + Vite con componentes de shadcn/ui. Cubre autenticación, CRUD de entidades y validación de extremo a extremo con TypeScript compartido.",
-      en: "End-to-end application with a Nest.js REST API, Prisma data modeling on MySQL and a React + Vite frontend built with shadcn/ui components. Covers authentication, entity CRUD and end-to-end validation with shared TypeScript types.",
-    },
-    highlights: [
-      { es: "Arquitectura modular de Nest.js (módulos, DTOs, pipes)", en: "Modular Nest.js architecture (modules, DTOs, pipes)" },
-      { es: "Migraciones y seeds con Prisma", en: "Prisma migrations and seeds" },
-      { es: "UI con shadcn/ui y Tailwind", en: "UI with shadcn/ui and Tailwind" },
-    ],
-    stack: ["Nest.js", "Prisma", "MySQL", "React", "TypeScript", "Vite", "shadcn/ui", "Tailwind CSS"],
-    // TODO: repoUrl cuando el repo esté en GitHub
-  },
-  {
-    slug: "customer-crud",
-    name: "Customer CRUD",
-    featured: false,
-    kind: "backend",
-    year: 2024,
-    accent: "oklch(0.7 0.15 230)",
-    summary: {
-      es: "API REST de gestión de clientes con Nest.js y Prisma.",
-      en: "Customer management REST API with Nest.js and Prisma.",
-    },
-    description: {
-      es: "Servicio backend con operaciones CRUD completas sobre clientes, validación con DTOs y pruebas e2e. Base para practicar la arquitectura de Nest.js y el flujo de migraciones de Prisma.",
-      en: "Backend service with full CRUD operations over customers, DTO validation and e2e tests. A base for practicing Nest.js architecture and the Prisma migration workflow.",
-    },
-    highlights: [],
-    stack: ["Nest.js", "Prisma", "TypeScript"],
-  },
-  {
-    slug: "ruleta-ia",
-    name: "Ruleta IA",
-    featured: false,
-    kind: "tool",
-    year: 2024,
-    accent: "oklch(0.68 0.2 15)",
-    summary: {
-      es: "Simulador en Python de ruleta y blackjack para analizar estrategias y probabilidades.",
-      en: "Python roulette and blackjack simulator for analyzing strategies and odds.",
-    },
-    description: {
-      es: "Scripts en Python que simulan miles de tiradas y manos para comparar estrategias de apuesta y visualizar cómo la ventaja de la casa se impone a largo plazo. Un ejercicio de probabilidad y análisis de datos.",
-      en: "Python scripts that simulate thousands of spins and hands to compare betting strategies and show how the house edge wins in the long run. An exercise in probability and data analysis.",
-    },
-    highlights: [],
-    stack: ["Python"],
-  },
-  {
-    slug: "unir-pdf",
-    name: "UnirPDF",
-    featured: false,
-    kind: "tool",
-    year: 2024,
-    accent: "oklch(0.75 0.12 90)",
-    summary: {
-      es: "Utilidad de línea de comandos para combinar varios PDF en uno.",
-      en: "Command-line utility to merge several PDFs into one.",
-    },
-    description: {
-      es: "Pequeña herramienta en Python para unir documentos PDF en el orden indicado. Nació de una necesidad real (trámites de titulación) y es un ejemplo de automatización de tareas cotidianas.",
-      en: "Small Python tool to merge PDF documents in a given order. Born from a real need (graduation paperwork) and an example of automating everyday chores.",
-    },
-    highlights: [],
-    stack: ["Python"],
   },
 ];
 

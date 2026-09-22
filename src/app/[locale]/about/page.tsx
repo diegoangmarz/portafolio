@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Briefcase, FileDown, GraduationCap, MapPin } from "lucide-react";
+import { Briefcase, FileDown, GraduationCap } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { profile } from "@/data/profile";
@@ -28,9 +28,6 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           <FadeIn>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{t("title")}</h1>
             <p className="mt-6 text-lg leading-relaxed text-fg-muted">{t("intro")}</p>
-            <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-fg-muted">
-              <MapPin className="size-4" /> {tr(profile.location, locale)}
-            </p>
           </FadeIn>
 
           <FadeIn className="mt-12">
@@ -56,9 +53,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
               {profile.education.map((e) => (
                 <li key={e.school} className="rounded-2xl border border-border bg-bg-elevated p-5">
                   <p className="font-medium">{tr(e.degree, locale)}</p>
-                  <p className="text-sm text-fg-muted">
-                    {e.school} · {tr(e.place, locale)}
-                  </p>
+                  <p className="text-sm text-fg-muted">{e.school}</p>
                   <p className="mt-1 font-mono text-xs text-fg-muted">{tr(e.period, locale)}</p>
                 </li>
               ))}

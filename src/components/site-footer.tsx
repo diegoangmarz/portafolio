@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { Mail } from "lucide-react";
 import { GithubIcon } from "./icons";
 import { profile } from "@/data/profile";
 import { Container } from "./ui/container";
@@ -20,9 +19,6 @@ export function SiteFooter() {
             className="inline-flex items-center gap-1.5 hover:text-fg"
           >
             <GithubIcon className="size-4" /> GitHub
-          </a>
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-1.5 hover:text-fg">
-            <Mail className="size-4" /> {profile.email}
           </a>
         </div>
       </Container>

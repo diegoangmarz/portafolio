@@ -8,13 +8,12 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib";
 import { Container } from "./ui/container";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./theme";
 import { LocaleSwitcher } from "./locale-switcher";
 
 const links = [
   { href: "/about", key: "about" },
   { href: "/projects", key: "projects" },
-  { href: "/blog", key: "blog" },
   { href: "/contact", key: "contact" },
 ] as const;
 

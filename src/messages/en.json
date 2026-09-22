@@ -1,13 +1,12 @@
 {
   "Meta": {
     "title": "Diego Angulo · Full-stack & AI developer",
-    "description": "Portfolio of Diego Angulo Marzuca, software engineer based in Mérida, Mexico. Full-stack projects with React, Nest.js, Next.js and AI integration."
+    "description": "Portfolio of Diego Angulo Marzuca, software engineer. Full-stack projects with React, Nest.js, Next.js and AI integration."
   },
   "Nav": {
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "blog": "Blog",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -29,9 +28,9 @@
   },
   "About": {
     "title": "About me",
-    "intro": "I'm a software engineer, graduate of Universidad Modelo (Mérida, Mexico). I enjoy building complete products —from the database schema to the last animation— and lately I focus on integrating artificial intelligence into real applications.",
+    "intro": "I'm a software engineer, graduate of Universidad Modelo. I enjoy building complete products —from the database schema to the last animation— and lately I focus on integrating artificial intelligence into real applications.",
     "now": "Currently",
-    "nowBody": "I work as a web development intern in the innovation department at {company}, and in parallel I'm taking a Data Science & Data Analytics program at Desafío Latam.",
+    "nowBody": "I work full-time as a full-stack developer at {company}, building web apps and PWAs from the frontend to the backend.",
     "education": "Education",
     "certifications": "Certifications",
     "skillsStrong": "Core stack",
@@ -42,7 +41,7 @@
   },
   "Projects": {
     "title": "Projects",
-    "subtitle": "Games, full-stack systems and utilities. The featured ones are deployed and you can try them.",
+    "subtitle": "Party games you can try right now: deployed and tested with real players.",
     "filterAll": "All",
     "kind": {
       "web": "Web",
@@ -61,34 +60,24 @@
     "notFound": "Project not found",
     "moreProjects": "More projects"
   },
-  "Blog": {
-    "title": "Blog",
-    "subtitle": "Notes on what I'm learning: applied AI, architecture and things that broke in production.",
-    "empty": "No posts yet. The first one will be about generating a trivia question bank with the Claude API.",
-    "soon": "Coming soon"
-  },
   "Contact": {
     "title": "Contact",
-    "subtitle": "Have a project, a role, or just want to talk about AI? Drop me a line.",
-    "emailLabel": "Email",
+    "subtitle": "Have a project, a role, or just want to talk about AI? Write to me and I'll reply by email.",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn",
-    "locationLabel": "Location",
-    "copy": "Copy",
-    "copied": "Copied!",
     "form": {
       "name": "Name",
       "email": "Email",
       "message": "Message",
       "send": "Send message",
       "sending": "Sending…",
-      "success": "Thanks! I'll get back to you soon.",
-      "error": "Couldn't send. Email me directly instead.",
-      "soon": "The form goes live soon; in the meantime, email works great."
+      "success": "Thanks! I got your message and will reply soon.",
+      "error": "The message couldn't be sent. Please try again in a moment.",
+      "note": "Your email is only used to reply to you."
     }
   },
   "Footer": {
-    "rights": "Built with Next.js, Tailwind and coffee in Mérida.",
+    "rights": "Built with Next.js, Tailwind and coffee.",
     "source": "Source of this site"
   },
   "NotFound": {

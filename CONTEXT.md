@@ -6,7 +6,9 @@ orden. Al retomar: `/leer-contexto`.
 ## Quién es el usuario
 
 **Diego Angulo Marzuca** — Ingeniero en Desarrollo de Tecnología y Software (Universidad Modelo,
-Mérida, Yuc.). Pasante Web Developer en SimDataGroup (feb 2025–). Interés: IA y automatización.
+Mérida, Yuc.). **Desarrollador full-stack de tiempo completo en SimDataGroup** (entró como pasante en
+feb 2025; hace web + PWA, front y back, similar a los juegos; **sin detalles por acuerdo de
+confidencialidad**, solo puesto). Interés: IA y automatización.
 Email diegoangmarz@gmail.com · GitHub `diegoangmarz`. El perfil completo está en
 `src/data/profile.ts` (es la fuente de verdad del CV dentro del sitio) y en
 `../trivia-spin/CONTEXT.md` → "Quién es el usuario".
@@ -40,9 +42,10 @@ Decisiones de Diego en la sesión 1 (AskUserQuestion):
 - `next` 16.3.5 (App Router, Turbopack, `proxy.ts` en lugar de `middleware.ts`), `react` 19.2.
 - `tailwindcss` 4 vía `@tailwindcss/postcss`; sin `tailwind.config` — todo en `globals.css`
   (`@theme inline`, `@custom-variant dark`).
-- `next-intl` 4.14 (routing con `pathnames` localizados), `next-themes` (clase `.dark`),
-  `framer-motion` 13, `lucide-react` 1.47 (**ya no trae iconos de marcas** → `components/icons.tsx`
-  con paths de Simple Icons para GitHub/LinkedIn).
+- `next-intl` 4.14 (routing con `pathnames` localizados), `framer-motion` 13, `lucide-react` 1.47
+  (**ya no trae iconos de marcas** → `components/icons.tsx` con paths de Simple Icons para
+  GitHub/LinkedIn). **Sin `next-themes`**: se quitó porque inyecta un `<script>` en el árbol de
+  React y React 19 avisa en consola; el tema es propio (`components/theme.tsx` + `theme-script.ts`).
 - Node 22, npm 11. `AGENTS.md` y `CLAUDE.md` los genera `next dev`/`next build` (docs de Next 16 en
   `node_modules/next/dist/docs/`); se commitean tal cual.
 
@@ -59,22 +62,24 @@ portafolio/
                                pathnames: /about→/sobre-mi, /projects→/proyectos, /contact→/contacto
     i18n/navigation.ts         Link, redirect, usePathname, useRouter, getPathname tipados
     i18n/request.ts            carga src/messages/{locale}.json
-    messages/es.json, en.json  textos de UI por namespace (Meta, Nav, Home, About, Projects, Blog, Contact, Footer, NotFound)
-    data/profile.ts            CV; tipo Localized = { es, en }
-    data/projects.ts           Project[] (6 proyectos; featured: TriviaSpin, El Alce Manda, Full Stack System)
+    messages/es.json, en.json  textos de UI por namespace (Meta, Nav, Home, About, Projects, Contact, Footer, NotFound)
+    data/profile.ts            CV; tipo Localized = { es, en }. Sin correo ni ubicación (decisión de Diego)
+    data/projects.ts           Project[]: solo TriviaSpin y El Alce Manda (los únicos con demo pública)
     lib.ts                     cn() y t(field, locale)
-    app/globals.css            tokens: --bg, --bg-elevated, --fg, --fg-muted, --border, --accent (ámbar),
+    app/globals.css            tokens: --bg, --bg-elevated, --fg, --fg-muted, --border, --accent (verde, hue 150),
                                --accent-strong, --accent-fg, --accent-soft, --ring; .hero-glow
-    app/[locale]/layout.tsx    <html lang> + fuentes Geist + ThemeProvider + NextIntlClientProvider + header/footer;
-                               generateStaticParams por locale; metadata desde Meta.*
-    app/[locale]/page.tsx      Home: hero, destacados, stack, bloque IA
-    app/[locale]/about/        Sobre mí (experiencia, formación, certificaciones, skills, botón CV deshabilitado)
-    app/[locale]/projects/     lista con filtro por tipo (ProjectsGrid, cliente) y detalle [slug] (SSG)
-    app/[locale]/blog/         vacío con «Próximamente» (Fase 3 lee de la DB)
-    app/[locale]/contact/      datos + CopyEmail + ContactForm (abre mailto: prellenado; Fase 3 → API route)
+    app/[locale]/layout.tsx    <html lang> + <head> con el script del tema + fuentes Geist + NextIntlClientProvider
+                               + header/footer; generateStaticParams por locale; metadata desde Meta.*
+    app/[locale]/page.tsx      Home: hero, destacados (grid de 2), stack, bloque IA
+    app/[locale]/about/        Sobre mí (puesto actual, formación, certificaciones, skills, botón CV deshabilitado)
+    app/[locale]/projects/     lista (ProjectsGrid: el filtro por tipo solo aparece si hay >1 tipo) y detalle [slug] (SSG)
+    app/[locale]/contact/      GitHub (+ LinkedIn si hay URL) + ContactForm → POST /api/contact
     app/[locale]/[...rest]/    notFound() para rutas desconocidas dentro del locale
     app/[locale]/not-found.tsx
-    components/                site-header (nav + menú móvil), site-footer, theme-toggle, locale-switcher,
+    app/api/contact/route.ts   valida, honeypot, rate limit en memoria (5/IP/10 min) y envía con Resend;
+                               sin RESEND_API_KEY imprime el mensaje en la terminal y responde ok (simulado)
+    components/                site-header (nav + menú móvil), site-footer, theme (useTheme + ThemeToggle),
+                               theme-script (inline en <head>), locale-switcher (<a> con navegación completa),
                                project-card, projects-grid, contact-form, motion (FadeIn/Stagger/FadeInItem),
                                icons, ui/{container,section,badge,button-styles}
 ```
@@ -84,15 +89,20 @@ portafolio/
 - **Idiomas**: el proxy redirige `/` → `/es`, reescribe los slugs localizados (`/es/sobre-mi` →
   ruta interna `/[locale]/about`) y redirige el slug equivocado (`/es/about` → `/es/sobre-mi`).
   En las páginas se usa `Link href="/about"` (interno) y next-intl pone el slug del idioma.
-  El `LocaleSwitcher` hace `router.replace({pathname, params}, {locale})` con `useParams()`.
+  El `LocaleSwitcher` es un `<a href>` construido con `getPathname({href:{pathname, params}, locale})`
+  → navegación completa a propósito (ver Gotchas).
 - **Contenido bilingüe de datos** (no de UI): campos `{ es, en }` resueltos con `t(field, locale)`
   de `src/lib.ts`. Los textos de UI van en `messages/*.json` con `useTranslations`/`getTranslations`.
-- **Tema**: `next-themes` con `attribute="class"`; los tokens cambian en `.dark`. El
-  `ThemeToggle` usa `useSyncExternalStore` para saber si ya montó (evita el desajuste de icono y
-  la regla `react-hooks/set-state-in-effect` de ESLint 9 de Next 16).
+- **Tema**: la clase `.dark` en `<html>` es la fuente de verdad. `theme-script.ts` (inline en
+  `<head>`, antes de pintar) la pone según `localStorage.theme` o `prefers-color-scheme`;
+  `components/theme.tsx` expone `useTheme()` (con `useSyncExternalStore`, devuelve `null` hasta
+  hidratar) y `ThemeToggle`. Los tokens cambian en `.dark`.
 - **Animaciones**: `components/motion.tsx` envuelve framer-motion en componentes cliente; las
-  páginas son server components y solo importan esos wrappers.
-- **Todo es estático** (SSG): 25 páginas en el build. No hay API routes todavía.
+  páginas son server components y solo importan esos wrappers. Con la pestaña en segundo plano
+  (p. ej. capturas desde la extensión) `whileInView` tarda en disparar: esperar 2 s antes de capturar.
+- **Páginas estáticas** (SSG) + una API route dinámica (`/api/contact`).
+- **Formulario de contacto**: `ContactForm` hace `fetch('/api/contact')`; éxito → mensaje con check.
+  Producción necesita `RESEND_API_KEY` + `CONTACT_TO_EMAIL` en Vercel (Resend free: 100/día).
 
 ## Gotchas
 
@@ -105,10 +115,21 @@ portafolio/
   ocupado: `netstat -ano | grep :PUERTO` + `taskkill //F //PID`.
 - Comandos Bash muy largos (varios heredocs) se truncan en esta terminal → escribir archivos
   grandes con la herramienta Write, uno por uno.
+- **Aviso "Encountered a script tag while rendering React component"**: React 19 lo lanza cuando
+  crea un `<script>` en el cliente. Con `next-themes` salía siempre; con nuestro script inline en
+  `<head>` solo saldría si el layout `[locale]` se volviera a montar en el cliente (cambio de
+  idioma con `router.replace`). Por eso el `LocaleSwitcher` es un `<a>` con navegación completa.
+  `next/script` con `beforeInteractive` también renderiza un `<script>` en el árbol: no sirve.
+- El dev server se arranca con `npm run dev -- -p 3210` (el 3000 lo usan los juegos); si la tarea
+  en segundo plano "falla" nada más arrancar suele ser el puerto ocupado por un `next` anterior.
 
 ## Historial de sesiones
 
 - **2026-09-21 (s1)** — Scaffold con `create-next-app` (Next 16.3.5). Decisiones de idioma/orden/DB.
-  i18n con next-intl y slugs localizados, tema claro/oscuro, tokens de color, datos de perfil y 6
-  proyectos, páginas Home/Sobre mí/Proyectos/Detalle/Blog/Contacto, 404, skills de flujo.
-  `lint` y `build` limpios; rutas verificadas con curl en `next start`. Sin remoto ni deploy todavía.
+  i18n con next-intl y slugs localizados, tema claro/oscuro, tokens de color, datos de perfil,
+  páginas Home/Sobre mí/Proyectos/Detalle/Contacto, 404, skills de flujo. Revisión en Edge con
+  Diego: acento **verde** (era ámbar), fuera `next-themes` (aviso de React), fuera Blog, fuera los
+  proyectos sin demo pública (quedan TriviaSpin y El Alce Manda), fuera correo/ubicación/Desafío
+  Latam, puesto actual = full-stack tiempo completo en SimDataGroup. Formulario de contacto real
+  vía `/api/contact` (Resend; simulado sin clave), probado en local. `lint` y `build` limpios.
+  Sin remoto ni deploy todavía.

@@ -1,13 +1,12 @@
 {
   "Meta": {
     "title": "Diego Angulo · Desarrollador full-stack e IA",
-    "description": "Portafolio de Diego Angulo Marzuca, ingeniero de software en Mérida, Yucatán. Proyectos full-stack con React, Nest.js, Next.js e integración de IA."
+    "description": "Portafolio de Diego Angulo Marzuca, ingeniero de software. Proyectos full-stack con React, Nest.js, Next.js e integración de IA."
   },
   "Nav": {
     "home": "Inicio",
     "about": "Sobre mí",
     "projects": "Proyectos",
-    "blog": "Blog",
     "contact": "Contacto",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
@@ -29,9 +28,9 @@
   },
   "About": {
     "title": "Sobre mí",
-    "intro": "Soy ingeniero en desarrollo de software egresado de la Universidad Modelo (Mérida, Yucatán). Me gusta construir productos completos —del esquema de base de datos a la última animación— y últimamente me dedico a integrar inteligencia artificial en aplicaciones reales.",
+    "intro": "Soy ingeniero en desarrollo de software egresado de la Universidad Modelo. Me gusta construir productos completos —del esquema de base de datos a la última animación— y últimamente me dedico a integrar inteligencia artificial en aplicaciones reales.",
     "now": "Actualmente",
-    "nowBody": "Trabajo como pasante de desarrollo web en el departamento de innovación de {company}, y en paralelo curso un programa de Data Science y Data Analytics en Desafío Latam.",
+    "nowBody": "Trabajo tiempo completo como desarrollador full-stack en {company}: aplicaciones web y PWA, del frontend al backend.",
     "education": "Formación",
     "certifications": "Certificaciones",
     "skillsStrong": "Stack principal",
@@ -42,7 +41,7 @@
   },
   "Projects": {
     "title": "Proyectos",
-    "subtitle": "Juegos, sistemas full-stack y utilidades. Los destacados están desplegados y puedes probarlos.",
+    "subtitle": "Juegos para fiestas que puedes probar ahora mismo: desplegados y probados con jugadores reales.",
     "filterAll": "Todos",
     "kind": {
       "web": "Web",
@@ -61,34 +60,24 @@
     "notFound": "Proyecto no encontrado",
     "moreProjects": "Otros proyectos"
   },
-  "Blog": {
-    "title": "Blog",
-    "subtitle": "Notas sobre lo que voy aprendiendo: IA aplicada, arquitectura y cosas que salieron mal en producción.",
-    "empty": "Todavía no hay entradas. La primera será sobre cómo generé un banco de preguntas de trivia con la API de Claude.",
-    "soon": "Próximamente"
-  },
   "Contact": {
     "title": "Contacto",
-    "subtitle": "¿Tienes un proyecto, una vacante o simplemente quieres platicar de IA? Escríbeme.",
-    "emailLabel": "Correo",
+    "subtitle": "¿Tienes un proyecto, una vacante o simplemente quieres platicar de IA? Escríbeme y te respondo por correo.",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn",
-    "locationLabel": "Ubicación",
-    "copy": "Copiar",
-    "copied": "¡Copiado!",
     "form": {
       "name": "Nombre",
       "email": "Correo",
       "message": "Mensaje",
       "send": "Enviar mensaje",
       "sending": "Enviando…",
-      "success": "¡Gracias! Te respondo pronto.",
-      "error": "No se pudo enviar. Escríbeme directamente al correo.",
-      "soon": "El formulario se activa pronto; mientras, el correo funciona perfecto."
+      "success": "¡Gracias! Recibí tu mensaje y te respondo pronto.",
+      "error": "No se pudo enviar el mensaje. Inténtalo de nuevo en un momento.",
+      "note": "Tu correo solo se usa para responderte."
     }
   },
   "Footer": {
-    "rights": "Hecho con Next.js, Tailwind y café en Mérida.",
+    "rights": "Hecho con Next.js, Tailwind y café.",
     "source": "Código de este sitio"
   },
   "NotFound": {

@@ -2,53 +2,43 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Check, Copy, Send } from "lucide-react";
-import { profile } from "@/data/profile";
+import { CheckCircle2, Send } from "lucide-react";
 import { buttonClass } from "./ui/button-styles";
 
-/** Botón que copia el correo al portapapeles. */
-export function CopyEmail() {
-  const t = useTranslations("Contact");
-  const [copied, setCopied] = useState(false);
+type Status = "idle" | "sending" | "success" | "error";
 
-  const copy = async () => {
+/** Formulario de contacto: envía a /api/contact (Resend). */
+export function ContactForm() {
+  const t = useTranslations("Contact.form");
+  const [status, setStatus] = useState<Status>("idle");
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    setStatus("sending");
     try {
-      await navigator.clipboard.writeText(profile.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      setStatus("success");
     } catch {
-      // Sin permisos de portapapeles: el enlace mailto sigue disponible
+      setStatus("error");
     }
   };
 
-  return (
-    <button
-      type="button"
-      onClick={copy}
-      className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1 text-xs text-fg-muted transition-colors hover:border-accent hover:text-fg"
-    >
-      {copied ? <Check className="size-3.5 text-accent-strong" /> : <Copy className="size-3.5" />}
-      {copied ? t("copied") : t("copy")}
-    </button>
-  );
-}
-
-/**
- * Formulario de contacto. Por ahora abre el cliente de correo con el mensaje
- * prellenado (sin backend). En la Fase 3 se cambia por una API route.
- */
-export function ContactForm() {
-  const t = useTranslations("Contact.form");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Portafolio · ${name}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name} <${email}>`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-  };
+  if (status === "success") {
+    return (
+      <div className="flex flex-col items-center gap-3 py-10 text-center">
+        <CheckCircle2 className="size-10 text-accent-strong" aria-hidden />
+        <p className="font-medium">{t("success")}</p>
+      </div>
+    );
+  }
 
   const field =
     "w-full rounded-xl border border-border bg-bg px-4 py-3 text-sm placeholder:text-fg-muted/70 focus:border-accent";
@@ -58,44 +48,33 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className="mb-1.5 block text-sm font-medium">{t("name")}</span>
-          <input
-            required
-            name="name"
-            autoComplete="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className={field}
-          />
+          <input required name="name" autoComplete="name" maxLength={80} className={field} />
         </label>
         <label className="block">
           <span className="mb-1.5 block text-sm font-medium">{t("email")}</span>
-          <input
-            required
-            type="email"
-            name="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={field}
-          />
+          <input required type="email" name="email" autoComplete="email" maxLength={120} className={field} />
         </label>
       </div>
       <label className="block">
         <span className="mb-1.5 block text-sm font-medium">{t("message")}</span>
-        <textarea
-          required
-          name="message"
-          rows={5}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className={field}
-        />
+        <textarea required name="message" rows={5} minLength={10} maxLength={4000} className={field} />
       </label>
+      {/* Campo trampa anti-spam: oculto para personas, los bots lo rellenan */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="flex flex-wrap items-center gap-4">
-        <button type="submit" className={buttonClass("primary")}>
-          <Send className="size-4" /> {t("send")}
+        <button type="submit" disabled={status === "sending"} className={buttonClass("primary")}>
+          <Send className="size-4" /> {status === "sending" ? t("sending") : t("send")}
         </button>
-        <p className="text-xs text-fg-muted">{t("soon")}</p>
+        <p className="text-xs text-fg-muted" role={status === "error" ? "alert" : undefined}>
+          {status === "error" ? t("error") : t("note")}
+        </p>
       </div>
     </form>
   );

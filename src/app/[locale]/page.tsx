@@ -71,7 +71,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         subtitle={t("featuredSubtitle")}
         className="border-t border-border"
       >
-        <Stagger className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="grid gap-5 md:grid-cols-2">
           {featuredProjects.map((p) => (
             <FadeInItem key={p.slug}>
               <ProjectCard project={p} />

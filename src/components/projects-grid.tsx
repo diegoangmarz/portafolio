@@ -12,32 +12,40 @@ const kinds: ProjectKind[] = ["game", "web", "backend", "tool"];
 export function ProjectsGrid({ projects }: { projects: Project[] }) {
   const t = useTranslations("Projects");
   const [kind, setKind] = useState<ProjectKind | "all">("all");
-  const visible = kind === "all" ? projects : projects.filter((p) => p.kind === kind);
+  const visible =
+    kind === "all" ? projects : projects.filter((p) => p.kind === kind);
   const present = kinds.filter((k) => projects.some((p) => p.kind === k));
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap gap-2" role="tablist" aria-label={t("title")}>
-        {(["all", ...present] as const).map((k) => (
-          <button
-            key={k}
-            type="button"
-            role="tab"
-            aria-selected={kind === k}
-            onClick={() => setKind(k)}
-            className={cn(
-              "rounded-full border px-3.5 py-1.5 text-sm transition-colors",
-              kind === k
-                ? "border-transparent bg-accent text-accent-fg"
-                : "border-border text-fg-muted hover:border-accent hover:text-fg",
-            )}
-          >
-            {k === "all" ? t("filterAll") : t(`kind.${k}`)}
-          </button>
-        ))}
-      </div>
+      {/* El filtro solo tiene sentido con más de un tipo de proyecto */}
+      {present.length > 1 && (
+        <div
+          className="mb-8 flex flex-wrap gap-2"
+          role="tablist"
+          aria-label={t("title")}
+        >
+          {(["all", ...present] as const).map((k) => (
+            <button
+              key={k}
+              type="button"
+              role="tab"
+              aria-selected={kind === k}
+              onClick={() => setKind(k)}
+              className={cn(
+                "rounded-full border px-3.5 py-1.5 text-sm transition-colors",
+                kind === k
+                  ? "border-transparent bg-accent text-accent-fg"
+                  : "border-border text-fg-muted hover:border-accent hover:text-fg",
+              )}
+            >
+              {k === "all" ? t("filterAll") : t(`kind.${k}`)}
+            </button>
+          ))}
+        </div>
+      )}
 
-      <motion.ul layout className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <motion.ul layout className="grid gap-5 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {visible.map((p) => (
             <motion.li
