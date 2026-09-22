@@ -138,4 +138,5 @@ portafolio/
   Latam, puesto actual = full-stack tiempo completo en SimDataGroup. Formulario de contacto real
   vía `/api/contact` (Resend; simulado sin clave) con plantilla HTML, probado con envío real a
   Gmail. Repo público `diegoangmarz/portafolio` creado desde Edge (sin `gh`), `dev` y `prod`
-  subidos. `lint` y `build` limpios. Vercel todavía no (Diego avisa).
+  subidos. Desplegado en Vercel: **https://diegoangulo.vercel.app** (rama `prod`; ver `INFRA.md`).
+  Otra sesión añadió `DESIGN.md` (sistema visual) en `dev` a las 21:40.

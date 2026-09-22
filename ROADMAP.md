@@ -4,21 +4,20 @@
 > Actualizar al cerrar cada sesión (`/actualizar-contexto`).
 
 **Última sesión:** 2026-09-21 (sesión 1)
-**Punto exacto donde quedamos:** Fase 1 revisada con Diego en Edge (escritorio, claro y oscuro,
-es/en): sitio público bilingüe con Home / Sobre mí / Proyectos (TriviaSpin y El Alce Manda) /
-Contacto, acento verde, formulario de contacto real vía `/api/contact` (probado en local en modo
-simulado). `npm run lint` y `npm run build` limpios. **Falta**: revisar en ancho de móvil, crear
-el repo en GitHub, desplegar en Vercel y conectar Resend.
+**Punto exacto donde quedamos:** **Sitio en producción: https://diegoangulo.vercel.app**
+(Vercel, rama `prod`, `INFRA.md` creado). Sitio bilingüe con Home / Sobre mí / Proyectos
+(TriviaSpin y El Alce Manda) / Contacto, acento verde, formulario real vía `/api/contact` con
+plantilla HTML (probado en local con envío real a Gmail). Al cerrar la sesión faltaba que Diego
+pegara `RESEND_API_KEY` en Vercel y pulsara Redeploy: hasta entonces el formulario en producción
+responde ok pero **no envía** (modo simulado).
 **Siguiente tarea al retomar:**
-1. Revisar en móvil (≤400 px): hero, tarjetas, menú hamburguesa, formulario. Ajustar lo que se rompa.
-2. Diego: rotar la API key de Resend (la primera pasó por el chat): borrarla en Resend, crear otra y
-   pegarla en `.env` (Diego, sin mandarla). Nota: sin dominio verificado, Resend solo entrega al
-   correo de la propia cuenta y desde `onboarding@resend.dev`; para este uso basta.
-3. Cuando Diego diga: `/promover-prod`, importar en Vercel con rama de producción `prod` y
-   variables `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `CONTACT_TO_EMAIL`. Crear `INFRA.md`.
-   Probar el formulario en producción y el sitio en el S24+.
-4. Endurecer el formulario (pedido por Diego): rate limit compartido con **Upstash Redis** (free)
-   y **Cloudflare Turnstile** (free) — ver §3 Alta.
+1. Confirmar que `RESEND_API_KEY` está en Vercel (Settings → Environment Variables) y que hubo
+   Redeploy; probar el formulario en https://diegoangulo.vercel.app/es/contacto y que llegue el correo.
+2. Revisión en el S24+ (Diego): hero, tarjetas, menú hamburguesa, formulario, claro/oscuro.
+   Anotar aquí lo que se vea mal y corregirlo.
+3. Diego: rotar la API key de Resend (la primera pasó por el chat): borrarla, crear otra, pegarla
+   en `.env` local y en Vercel, Redeploy.
+4. Fase 1.5 (pulido) cuando Diego quiera; endurecer el formulario (Upstash + Turnstile) — §3 Alta.
 
 ---
 
@@ -29,11 +28,11 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 | Scaffold Next 16 + Tailwind 4 + TS | Hecho (2026-09-21) |
 | i18n es/en con slugs localizados | Hecho (2026-09-21) |
 | Tema claro/oscuro + tokens de acento | Hecho (2026-09-21) |
-| Home / Sobre mí / Proyectos / Detalle / Contacto / 404 | Hecho (2026-09-21) — revisado en escritorio; falta móvil |
-| Datos de perfil y proyectos en código | Hecho (2026-09-21) — falta LinkedIn |
+| Home / Sobre mí / Proyectos / Detalle / Contacto / 404 | Hecho (2026-09-21) — revisado en escritorio; falta móvil (S24+) |
+| Datos de perfil y proyectos en código | Hecho (2026-09-21) |
 | Formulario de contacto con backend (`/api/contact` + Resend, plantilla HTML) | Hecho (2026-09-21) — probado con envío real |
 | Repo GitHub (`diegoangmarz/portafolio`, público) | Hecho (2026-09-21) |
-| Deploy Vercel | Pendiente — Diego avisa cuándo |
+| Deploy Vercel (`prod` → https://diegoangulo.vercel.app) | Hecho (2026-09-21) — falta `RESEND_API_KEY` en Vercel |
 | Anti-abuso robusto del formulario (Upstash + Turnstile) | Pendiente (hoy: honeypot + límite en memoria) |
 | Capturas/imágenes de proyectos | Pendiente (hoy: franja de color por proyecto) |
 | CV en PDF descargable | Pendiente (botón deshabilitado en Sobre mí) |
@@ -44,7 +43,7 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 
 ## 2. Plan principal
 
-### Fase 1 — Sitio público desplegado  ← SIGUIENTE (cerrar esta fase)
+### Fase 1 — Sitio público desplegado (casi cerrada)
 - [x] Scaffold, i18n, tema, componentes base.
 - [x] Páginas con contenido real desde `src/data/`.
 - [x] Revisión visual en escritorio (claro + oscuro, es/en) y ajustes de Diego (2026-09-21).
@@ -52,8 +51,8 @@ el repo en GitHub, desplegar en Vercel y conectar Resend.
 - [x] LinkedIn añadido; etiqueta «Disponible para nuevas oportunidades» eliminada (Diego trabaja,
       no busca; 2026-09-21). Si algún día la quiere, era un `Badge` con punto animado en el hero.
 - [x] Repo público en GitHub (`dev`/`prod`).
-- [ ] Vercel con rama `prod` + variables + `INFRA.md`.  ← EN CURSO
-- [ ] Revisión en móvil (S24+) sobre la URL de Vercel.
+- [x] Vercel con rama `prod` + variables + `INFRA.md` (2026-09-21). Falta `RESEND_API_KEY` (Diego).
+- [ ] Revisión en móvil (S24+) sobre https://diegoangulo.vercel.app.  ← SIGUIENTE
 
 ### Fase 1.5 — Pulido para reclutadores (backlog documentado, hacer después del deploy)
 Decisión de Diego (2026-09-21): esto queda registrado aquí, no se hace todavía.
