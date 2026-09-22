@@ -53,7 +53,7 @@ Decisiones de Diego en la sesión 1 (AskUserQuestion):
 
 ```
 portafolio/
-  README.md, CONTEXT.md, ROADMAP.md, .env.example
+  README.md, CONTEXT.md, ROADMAP.md, DESIGN.md (sistema visual: tokens, tipografía, espaciado), .env.example
   .claude/skills/{verificar,nuevo-proyecto}/SKILL.md   (las skills de flujo viven en ~/.claude/skills)
   next.config.ts               plugin de next-intl (apunta a src/i18n/request.ts) + remotePatterns
   src/
