@@ -130,6 +130,14 @@ portafolio/
 
 ## Historial de sesiones
 
+- **2026-09-25 (s2)** — Sesión de diseño, **sin una línea de código**. Se recorrió en vivo el
+  portafolio del mentor de Diego (https://www.sonnymijael.com/) para sacar ideas, no código, y
+  quedó diseñada la **Fase 1.6** del roadmap: animaciones «notorio pero sobrio», fichas sin
+  mención al repo y el año de los dos proyectos corregido a 2026 (el primer commit de TriviaSpin
+  es del 2026-09-12 y el de El Alce Manda del 2026-09-14, así que el 2025 que había era falso).
+  Las decisiones de Diego —nivel de animación, qué ideas se toman, que el enlace al perfil de
+  GitHub se queda— están en `ROADMAP.md` §4, y el plan por tandas con archivos y verificación en
+  `ROADMAP.md` → Fase 1.6.
 - **2026-09-21 (s1)** — Scaffold con `create-next-app` (Next 16.3.5). Decisiones de idioma/orden/DB.
   i18n con next-intl y slugs localizados, tema claro/oscuro, tokens de color, datos de perfil,
   páginas Home/Sobre mí/Proyectos/Detalle/Contacto, 404, skills de flujo. Revisión en Edge con
