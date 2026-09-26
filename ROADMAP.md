@@ -149,6 +149,19 @@ dos nuevos (`marquee.tsx`, `page-transition.tsx`).
 ## 3. Backlog
 
 ### Alta
+- [ ] **Los enlaces de demo van a cambiar: los juegos se unifican en un hub** (Diego,
+      2026-09-25). Está creando una tanda nueva de juegos y decidió que los que ya existen
+      (TriviaSpin, El Alce Manda) y los nuevos vivan en **un solo front**, con una ruta por
+      juego. La forma tentativa es `gamehub.vercel.app/<juego>` — nombre y dominio **sin
+      decidir todavía**. Impacto en este repo:
+      - Los `liveUrl` de `data/projects.ts` dejan de apuntar a `trivia-spin.vercel.app` y
+        `el-alce-manda.vercel.app`.
+      - Hay que decidir si el portafolio muestra **una ficha por juego** apuntando a su ruta del
+        hub, o **una sola ficha del hub**. Recomendación: una ficha por juego (cada uno tiene su
+        propia historia técnica: Socket.IO y Postgres en uno, reducer puro en el otro) y el hub
+        como proyecto aparte cuando exista y tenga algo que contar.
+      - **No tocar los `liveUrl` hasta que el hub esté desplegado y sus rutas sean estables.** Un
+        enlace roto en el portafolio es peor que uno viejo que funciona.
 - [ ] **Anti-abuso del formulario** (Diego, 2026-09-21: "limitar los envíos por si intentan atacar la
       página"). Hoy: validación + honeypot + 5 envíos/IP/10 min en memoria (en Vercel el contador es
       por instancia, no compartido). Plan: `@upstash/ratelimit` con Upstash Redis (free) para un
@@ -193,6 +206,11 @@ dos nuevos (`marquee.tsx`, `page-transition.tsx`).
 - **2026-09-25** — **El enlace al perfil de GitHub se queda** (hero y footer). Consecuencia
   asumida: TriviaSpin es público en GitHub y queda a un clic desde el perfil; si algún día no se
   quiere visible, se cambia la visibilidad en GitHub, no en el portafolio.
+- **2026-09-25** — Los juegos se unifican en **un solo front** (hub) con una ruta por juego, en
+  vez de un despliegue por juego. Esto invalida en parte la decisión del 2026-09-21 de «no
+  fusionar los juegos en una app»: aquella era sobre no juntarlos solo por ahorrar proyectos en
+  Vercel; esta viene de una tanda nueva de juegos que comparten portada. Los `liveUrl` de este
+  repo se actualizan cuando el hub esté en pie, no antes.
 - **2026-09-25** — De las ideas del portafolio del mentor (https://www.sonnymijael.com/) se toman
   la marquesina de stack, el saludo en píldora y las capturas reales. **No** se toma la línea de
   tiempo «Bio». Son ideas, no código: nada se copia de ese sitio.
